@@ -1,0 +1,176 @@
+{
+  "_meta": {
+    "models": {
+      "reportKpi": "A summary card showing a key metric with its current value, previous period value, and percentage change — used across all report tabs.",
+      "chartDataPoint": "A single data point for chart visualizations — bars, donut segments, funnel stages, or trend lines.",
+      "salesTeamRow": "A row in the team performance table showing individual team member contributions to sales.",
+      "lawyerPerformanceRow": "A row in the lawyer performance table showing case handling metrics per lawyer.",
+      "receivableRow": "A row in the accounts receivables table showing outstanding invoice details.",
+      "wmPerformanceRow": "A row in the WM performance table showing each wealth manager's sales and package spend metrics.",
+      "documentStatusRow": "A row in the document status table showing individual document details and turnaround times."
+    },
+    "relationships": [
+      "KPIs aggregate data from Leads, Cases, Invoices, Payments, WealthManagers, and Documents across the system",
+      "Sales tab pulls from Lead and Quotation data, grouped by team member and lead source",
+      "Cases tab pulls from Case and Lawyer data, grouped by status and lawyer assignment",
+      "Accounts tab pulls from Invoice and Payment data, grouped by aging period and customer",
+      "WM Performance tab pulls from WealthManager, Lead, and WalletTransaction data",
+      "Documents tab pulls from Document and Template data, grouped by template type and status"
+    ]
+  },
+  "dateRange": {
+    "current": { "label": "This Month", "start": "2026-04-01", "end": "2026-04-17" },
+    "previous": { "label": "Last Month", "start": "2026-03-01", "end": "2026-03-31" }
+  },
+  "sales": {
+    "kpis": [
+      { "id": "s-kpi-1", "label": "Pipeline Value", "value": 4560000, "previousValue": 3820000, "changePercent": 19.4, "changeDirection": "up", "format": "currency" },
+      { "id": "s-kpi-2", "label": "Conversion Rate", "value": 68, "previousValue": 62, "changePercent": 9.7, "changeDirection": "up", "format": "percent" },
+      { "id": "s-kpi-3", "label": "New Leads", "value": 34, "previousValue": 28, "changePercent": 21.4, "changeDirection": "up", "format": "number" },
+      { "id": "s-kpi-4", "label": "Avg Deal Size", "value": 153000, "previousValue": 136000, "changePercent": 12.5, "changeDirection": "up", "format": "currency" }
+    ],
+    "pipelineByStage": [
+      { "label": "Total Leads", "value": 210 },
+      { "label": "Qualified", "value": 156 },
+      { "label": "Quotation Sent", "value": 118 },
+      { "label": "Converted", "value": 81 }
+    ],
+    "leadSourceROI": [
+      { "label": "WM Referral", "value": 4200000, "leads": 89 },
+      { "label": "Website", "value": 3100000, "leads": 52 },
+      { "label": "Direct Call", "value": 2800000, "leads": 38 },
+      { "label": "Social Media", "value": 1500000, "leads": 22 },
+      { "label": "Events", "value": 850000, "leads": 9 }
+    ],
+    "teamPerformance": [
+      { "id": "st-1", "name": "Anurag Bhatia", "role": "Admin", "leadsAssigned": 42, "conversions": 31, "revenue": 4750000, "conversionRate": 73.8, "avgDealSize": 153226 },
+      { "id": "st-2", "name": "Manish Tiwari", "role": "Operations", "leadsAssigned": 38, "conversions": 24, "revenue": 3680000, "conversionRate": 63.2, "avgDealSize": 153333 },
+      { "id": "st-3", "name": "Sneha Desai", "role": "Sales", "leadsAssigned": 35, "conversions": 22, "revenue": 3100000, "conversionRate": 62.9, "avgDealSize": 140909 },
+      { "id": "st-4", "name": "Amit Joshi", "role": "Sales", "leadsAssigned": 28, "conversions": 18, "revenue": 2520000, "conversionRate": 64.3, "avgDealSize": 140000 },
+      { "id": "st-5", "name": "Priyanka Nair", "role": "Sales", "leadsAssigned": 22, "conversions": 12, "revenue": 1560000, "conversionRate": 54.5, "avgDealSize": 130000 }
+    ]
+  },
+  "cases": {
+    "kpis": [
+      { "id": "c-kpi-1", "label": "Active Cases", "value": 24, "previousValue": 20, "changePercent": 20, "changeDirection": "up", "format": "number" },
+      { "id": "c-kpi-2", "label": "Avg Resolution", "value": 18, "previousValue": 22, "changePercent": 18.2, "changeDirection": "down", "format": "days" },
+      { "id": "c-kpi-3", "label": "SLA Compliance", "value": 87, "previousValue": 82, "changePercent": 6.1, "changeDirection": "up", "format": "percent" },
+      { "id": "c-kpi-4", "label": "Completed This Period", "value": 12, "previousValue": 9, "changePercent": 33.3, "changeDirection": "up", "format": "number" }
+    ],
+    "statusBreakdown": [
+      { "label": "In Progress", "value": 12, "color": "blue" },
+      { "label": "Drafting", "value": 5, "color": "violet" },
+      { "label": "Under Review", "value": 4, "color": "amber" },
+      { "label": "Completed", "value": 57, "color": "emerald" },
+      { "label": "On Hold", "value": 3, "color": "neutral" }
+    ],
+    "resolutionTrend": [
+      { "month": "Nov 2025", "avgDays": 24 },
+      { "month": "Dec 2025", "avgDays": 22 },
+      { "month": "Jan 2026", "avgDays": 21 },
+      { "month": "Feb 2026", "avgDays": 20 },
+      { "month": "Mar 2026", "avgDays": 19 },
+      { "month": "Apr 2026", "avgDays": 18 }
+    ],
+    "lawyerPerformance": [
+      { "id": "lp-1", "name": "Adv. Priya Sharma", "specialization": "Wills & Trusts", "activeCases": 8, "completedCases": 22, "avgResolutionDays": 16, "slaCompliance": 92, "rating": 4.8 },
+      { "id": "lp-2", "name": "Adv. Rohan Mehta", "specialization": "Succession", "activeCases": 6, "completedCases": 18, "avgResolutionDays": 19, "slaCompliance": 85, "rating": 4.5 },
+      { "id": "lp-3", "name": "Adv. Kavita Iyer", "specialization": "Wills & Trusts", "activeCases": 5, "completedCases": 12, "avgResolutionDays": 17, "slaCompliance": 90, "rating": 4.7 },
+      { "id": "lp-4", "name": "Adv. Sameer Khan", "specialization": "Trust Registration", "activeCases": 3, "completedCases": 5, "avgResolutionDays": 21, "slaCompliance": 80, "rating": 4.2 },
+      { "id": "lp-5", "name": "Adv. Deepa Nair", "specialization": "Succession", "activeCases": 2, "completedCases": 0, "avgResolutionDays": 0, "slaCompliance": 100, "rating": 0 }
+    ]
+  },
+  "accounts": {
+    "kpis": [
+      { "id": "a-kpi-1", "label": "Total Revenue", "value": 1875000, "previousValue": 1620000, "changePercent": 15.7, "changeDirection": "up", "format": "currency" },
+      { "id": "a-kpi-2", "label": "Outstanding Receivables", "value": 430000, "previousValue": 510000, "changePercent": 15.7, "changeDirection": "down", "format": "currency" },
+      { "id": "a-kpi-3", "label": "Collection Rate", "value": 92, "previousValue": 88, "changePercent": 4.5, "changeDirection": "up", "format": "percent" },
+      { "id": "a-kpi-4", "label": "Avg Payment Days", "value": 8, "previousValue": 11, "changePercent": 27.3, "changeDirection": "down", "format": "days" }
+    ],
+    "revenueByMonth": [
+      { "month": "Nov 2025", "revenue": 1250000, "target": 1400000 },
+      { "month": "Dec 2025", "revenue": 980000, "target": 1400000 },
+      { "month": "Jan 2026", "revenue": 1450000, "target": 1500000 },
+      { "month": "Feb 2026", "revenue": 1680000, "target": 1500000 },
+      { "month": "Mar 2026", "revenue": 1620000, "target": 1500000 },
+      { "month": "Apr 2026", "revenue": 1875000, "target": 1600000 }
+    ],
+    "agingAnalysis": [
+      { "label": "0–30 days", "amount": 180000, "count": 4, "color": "emerald" },
+      { "label": "31–60 days", "amount": 120000, "count": 3, "color": "amber" },
+      { "label": "61–90 days", "amount": 80000, "count": 2, "color": "orange" },
+      { "label": "90+ days", "amount": 50000, "count": 1, "color": "red" }
+    ],
+    "receivables": [
+      { "id": "rcv-1", "customerName": "Vikram Bhatia", "invoiceNumber": "INV-2026-0072", "amount": 125000, "dueDate": "2026-04-20", "daysOverdue": 0, "status": "current" },
+      { "id": "rcv-2", "customerName": "Sunita Oberoi", "invoiceNumber": "INV-2026-0065", "amount": 85000, "dueDate": "2026-04-05", "daysOverdue": 12, "status": "overdue" },
+      { "id": "rcv-3", "customerName": "Arvind Saxena", "invoiceNumber": "INV-2026-0068", "amount": 60000, "dueDate": "2026-03-28", "daysOverdue": 20, "status": "overdue" },
+      { "id": "rcv-4", "customerName": "Meera Reddy", "invoiceNumber": "INV-2026-0070", "amount": 45000, "dueDate": "2026-04-10", "daysOverdue": 7, "status": "overdue" },
+      { "id": "rcv-5", "customerName": "Harish Gupta", "invoiceNumber": "INV-2026-0074", "amount": 35000, "dueDate": "2026-04-25", "daysOverdue": 0, "status": "current" },
+      { "id": "rcv-6", "customerName": "Divya Chatterjee", "invoiceNumber": "INV-2026-0060", "amount": 50000, "dueDate": "2026-02-15", "daysOverdue": 61, "status": "critical" },
+      { "id": "rcv-7", "customerName": "Rajesh Malhotra", "invoiceNumber": "INV-2026-0058", "amount": 30000, "dueDate": "2026-01-10", "daysOverdue": 97, "status": "critical" }
+    ]
+  },
+  "wmPerformance": {
+    "kpis": [
+      { "id": "w-kpi-1", "label": "Total WM Sales", "value": 8500000, "previousValue": 7100000, "changePercent": 19.7, "changeDirection": "up", "format": "currency" },
+      { "id": "w-kpi-2", "label": "Active WMs", "value": 5, "previousValue": 4, "changePercent": 25, "changeDirection": "up", "format": "number" },
+      { "id": "w-kpi-3", "label": "Total Packages Sold", "value": 14, "previousValue": 10, "changePercent": 40, "changeDirection": "up", "format": "number" },
+      { "id": "w-kpi-4", "label": "Pkg Revenue", "value": 413000, "previousValue": 320000, "changePercent": 29.1, "changeDirection": "up", "format": "currency" }
+    ],
+    "salesByWM": [
+      { "label": "Rakesh Mehra", "value": 3200000, "tier": "gold" },
+      { "label": "Neha Kapoor", "value": 2400000, "tier": "gold" },
+      { "label": "Anil Verma", "value": 1500000, "tier": "silver" },
+      { "label": "Deepa Joshi", "value": 850000, "tier": "silver" },
+      { "label": "Vikrant Patil", "value": 550000, "tier": "bronze" }
+    ],
+    "conversionFunnel": [
+      { "label": "Leads Referred", "value": 142 },
+      { "label": "Qualified", "value": 98 },
+      { "label": "Quotation Sent", "value": 72 },
+      { "label": "Converted", "value": 48 }
+    ],
+    "performanceTable": [
+      { "id": "wpt-1", "wmId": "WPAT-00001", "name": "Rakesh Mehra", "tier": "gold", "currentTier": "gold", "leads": 45, "conversions": 18, "sales": 3200000, "willsRemaining": 19, "totalPackageSpend": 59000, "customers": 18, "status": "active" },
+      { "id": "wpt-2", "wmId": "WPAT-00002", "name": "Neha Kapoor", "tier": "platinum", "currentTier": "platinum", "leads": 38, "conversions": 14, "sales": 2400000, "willsRemaining": 76, "totalPackageSpend": 236000, "customers": 14, "status": "active" },
+      { "id": "wpt-3", "wmId": "WPAT-00003", "name": "Anil Verma", "tier": "silver", "currentTier": "silver", "leads": 28, "conversions": 8, "sales": 1500000, "willsRemaining": 2, "totalPackageSpend": 17700, "customers": 8, "status": "active" },
+      { "id": "wpt-4", "wmId": "WPAT-00004", "name": "Deepa Joshi", "tier": "silver", "currentTier": "silver", "leads": 18, "conversions": 5, "sales": 850000, "willsRemaining": 3, "totalPackageSpend": 17700, "customers": 5, "status": "active" },
+      { "id": "wpt-5", "wmId": "WPAT-00005", "name": "Vikrant Patil", "tier": "bronze", "currentTier": "bronze", "leads": 13, "conversions": 3, "sales": 550000, "willsRemaining": 0, "totalPackageSpend": 5900, "customers": 3, "status": "active" },
+      { "id": "wpt-6", "wmId": "WPAT-00006", "name": "Suresh Nair", "tier": "bronze", "currentTier": "silver", "leads": 5, "conversions": 0, "sales": 0, "willsRemaining": 4, "totalPackageSpend": 17700, "customers": 0, "status": "inactive" }
+    ]
+  },
+  "documents": {
+    "kpis": [
+      { "id": "d-kpi-1", "label": "Documents Created", "value": 18, "previousValue": 14, "changePercent": 28.6, "changeDirection": "up", "format": "number" },
+      { "id": "d-kpi-2", "label": "Approved", "value": 12, "previousValue": 10, "changePercent": 20, "changeDirection": "up", "format": "number" },
+      { "id": "d-kpi-3", "label": "Pending Approval", "value": 6, "previousValue": 4, "changePercent": 50, "changeDirection": "up", "format": "number" },
+      { "id": "d-kpi-4", "label": "Avg TAT", "value": 3.2, "previousValue": 4.1, "changePercent": 22, "changeDirection": "down", "format": "days" }
+    ],
+    "statusOverTime": [
+      { "month": "Nov 2025", "created": 10, "approved": 8, "pending": 2 },
+      { "month": "Dec 2025", "created": 8, "approved": 7, "pending": 1 },
+      { "month": "Jan 2026", "created": 14, "approved": 11, "pending": 3 },
+      { "month": "Feb 2026", "created": 16, "approved": 13, "pending": 3 },
+      { "month": "Mar 2026", "created": 15, "approved": 12, "pending": 3 },
+      { "month": "Apr 2026", "created": 18, "approved": 12, "pending": 6 }
+    ],
+    "templateBreakdown": [
+      { "label": "Basic Will", "created": 32, "approved": 28, "pending": 4 },
+      { "label": "Advanced Will", "created": 18, "approved": 15, "pending": 3 },
+      { "label": "Living Trust", "created": 12, "approved": 9, "pending": 3 },
+      { "label": "Family Trust", "created": 8, "approved": 6, "pending": 2 },
+      { "label": "Succession Certificate", "created": 11, "approved": 10, "pending": 1 }
+    ],
+    "documentTable": [
+      { "id": "dt-1", "docId": "DOC-00035", "caseId": "W24-CASE-00009", "customerName": "Sudhir Menon", "template": "Basic Will", "status": "draft", "createdDate": "2026-04-16", "tatDays": 1 },
+      { "id": "dt-2", "docId": "DOC-00034", "caseId": "W24-CASE-00008", "customerName": "Harish Gupta", "template": "Advanced Will", "status": "under-review", "createdDate": "2026-04-14", "tatDays": 3 },
+      { "id": "dt-3", "docId": "DOC-00033", "caseId": "W24-CASE-00007", "customerName": "Meera Reddy", "template": "Living Trust", "status": "under-review", "createdDate": "2026-04-12", "tatDays": 5 },
+      { "id": "dt-4", "docId": "DOC-00032", "caseId": "W24-CASE-00006", "customerName": "Sunita Oberoi", "template": "Basic Will", "status": "approved", "createdDate": "2026-04-08", "tatDays": 3 },
+      { "id": "dt-5", "docId": "DOC-00031", "caseId": "W24-CASE-00005", "customerName": "Deepak Kulkarni", "template": "Advanced Will", "status": "approved", "createdDate": "2026-04-05", "tatDays": 4 },
+      { "id": "dt-6", "docId": "DOC-00030", "caseId": "W24-CASE-00004", "customerName": "Divya Chatterjee", "template": "Family Trust", "status": "delivered", "createdDate": "2026-03-28", "tatDays": 2 },
+      { "id": "dt-7", "docId": "DOC-00028", "caseId": "W24-CASE-00002", "customerName": "Arvind Saxena", "template": "Living Trust", "status": "under-review", "createdDate": "2026-04-09", "tatDays": 8 },
+      { "id": "dt-8", "docId": "DOC-00027", "caseId": "W24-CASE-00001", "customerName": "Prakash Jain", "template": "Succession Certificate", "status": "approved", "createdDate": "2026-03-25", "tatDays": 3 }
+    ]
+  }
+}

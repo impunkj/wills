@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "noEmit": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "ES2021"
+  },
+  "include": ["src/main.ts", "src/app.module.ts", "src/prisma-global.module.ts", "src/seed.ts", "src/modules/**/*"],
+  "exclude": ["src/main.tsx", "src/features/**/*", "src/pages/**/*", "src/services/**/*", "src/components/**/*"]
+}

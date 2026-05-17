@@ -1,0 +1,292 @@
+{
+  "_meta": {
+    "models": {
+      "kpiStats": "Aggregated performance metrics displayed as KPI cards on the dashboard — sales, cases, customers, partners, and team numbers for the current or selected period.",
+      "activityFeed": "Recent actions taken across the platform — lead creation, case updates, payments, partner onboarding — shown as a timeline with actor and timestamp.",
+      "pendingItems": "Urgent items and SLA alerts requiring admin attention — overdue follow-ups, expiring packages, SLA breaches, and upcoming deadlines.",
+      "salesTrend": "Monthly sales revenue data points for the sales trend line chart over the past 6 months.",
+      "caseStatusDistribution": "Breakdown of all cases by their current status for the case distribution donut/pie chart.",
+      "monthlyRevenue": "Monthly revenue totals for the bar chart showing revenue over the past 6 months.",
+      "conversionFunnel": "Lead-to-customer conversion funnel stages with counts at each step.",
+      "quickActions": "Shortcut buttons for frequently used admin actions across modules."
+    },
+    "relationships": [
+      "KPI stats are computed from Leads, Cases, Customers, Partners, and Employees across the system",
+      "Activity feed entries reference entities from other sections (Leads, Cases, Payments, Partners)",
+      "Pending items link to specific Cases, Follow-ups, or Payouts that need attention",
+      "Chart data is aggregated from Sales, Cases, and Lead conversion records"
+    ]
+  },
+  "kpiStats": {
+    "totalSales": 12450000,
+    "revenueThisMonth": 1875000,
+    "revenuePreviousMonth": 1620000,
+    "activeCases": 24,
+    "completedCases": 57,
+    "avgResolutionDays": 18,
+    "newLeads": 34,
+    "newLeadsPreviousMonth": 28,
+    "totalCustomers": 81,
+    "activePartners": 5,
+    "totalPartners": 6,
+    "willsRemaining": 131,
+    "activeTeamMembers": 12,
+    "totalTeamMembers": 14,
+    "tasksAssigned": 38,
+    "slaBreaches": 3,
+    "overdueFollowUps": 5,
+    "conversionRate": 68
+  },
+  "activityFeed": [
+    {
+      "id": "ACT-001",
+      "actor": "Anurag Bhatia",
+      "actorRole": "admin",
+      "action": "created a new lead",
+      "entityType": "lead",
+      "entityName": "Sudhir Menon",
+      "entityId": "W24-LEAD-00089",
+      "timestamp": "2026-04-17T10:45:00Z"
+    },
+    {
+      "id": "ACT-002",
+      "actor": "Manish Tiwari",
+      "actorRole": "operations",
+      "action": "updated case status to Court Filing",
+      "entityType": "case",
+      "entityName": "Prakash Jain — Succession Certificate",
+      "entityId": "W24-CASE-00001",
+      "timestamp": "2026-04-17T09:30:00Z"
+    },
+    {
+      "id": "ACT-003",
+      "actor": "System",
+      "actorRole": "system",
+      "action": "payment received via NEFT",
+      "entityType": "payment",
+      "entityName": "₹1,50,000 from Vikram Bhatia",
+      "entityId": "PMT-00045",
+      "timestamp": "2026-04-17T08:15:00Z"
+    },
+    {
+      "id": "ACT-004",
+      "actor": "Neha Kapoor",
+      "actorRole": "partner",
+      "action": "onboarded a new customer",
+      "entityType": "customer",
+      "entityName": "Dr. Lakshmi Venkataraman",
+      "entityId": "WCUS-00005",
+      "timestamp": "2026-04-16T18:00:00Z"
+    },
+    {
+      "id": "ACT-005",
+      "actor": "Adv. Priya Sharma",
+      "actorRole": "lawyer",
+      "action": "uploaded approved Will document",
+      "entityType": "document",
+      "entityName": "Will — Sunita Oberoi",
+      "entityId": "DOC-00032",
+      "timestamp": "2026-04-16T16:30:00Z"
+    },
+    {
+      "id": "ACT-006",
+      "actor": "Anurag Bhatia",
+      "actorRole": "admin",
+      "action": "generated Tax Invoice",
+      "entityType": "invoice",
+      "entityName": "INV-2026-0078 — Arvind Saxena",
+      "entityId": "INV-0078",
+      "timestamp": "2026-04-16T15:00:00Z"
+    },
+    {
+      "id": "ACT-007",
+      "actor": "Manish Tiwari",
+      "actorRole": "operations",
+      "action": "assigned lawyer to case",
+      "entityType": "case",
+      "entityName": "Meera Reddy — Trust Drafting",
+      "entityId": "W24-CASE-00007",
+      "timestamp": "2026-04-16T14:20:00Z"
+    },
+    {
+      "id": "ACT-008",
+      "actor": "Rakesh Mehra",
+      "actorRole": "partner",
+      "action": "submitted new lead referral",
+      "entityType": "lead",
+      "entityName": "Harish Gupta",
+      "entityId": "W24-LEAD-00088",
+      "timestamp": "2026-04-16T11:45:00Z"
+    },
+    {
+      "id": "ACT-009",
+      "actor": "System",
+      "actorRole": "system",
+      "action": "purchased Gold Tier package",
+      "entityType": "package",
+      "entityName": "Gold Tier — 25 wills for Rakesh Mehra",
+      "entityId": "WTX-001",
+      "timestamp": "2026-04-16T10:00:00Z"
+    },
+    {
+      "id": "ACT-010",
+      "actor": "Anurag Bhatia",
+      "actorRole": "admin",
+      "action": "purchased Platinum Tier package",
+      "entityType": "package",
+      "entityName": "Platinum Tier — 100 wills for Neha Kapoor",
+      "entityId": "PAY-WM-0023",
+      "timestamp": "2026-04-15T17:00:00Z"
+    },
+    {
+      "id": "ACT-011",
+      "actor": "Adv. Rohan Mehta",
+      "actorRole": "lawyer",
+      "action": "completed case review",
+      "entityType": "case",
+      "entityName": "Deepak Kulkarni — Will Drafting",
+      "entityId": "W24-CASE-00005",
+      "timestamp": "2026-04-15T14:30:00Z"
+    },
+    {
+      "id": "ACT-012",
+      "actor": "Manish Tiwari",
+      "actorRole": "operations",
+      "action": "scheduled follow-up meeting",
+      "entityType": "followup",
+      "entityName": "Quarterly review — Divya Chatterjee",
+      "entityId": "WFU-007",
+      "timestamp": "2026-04-15T10:00:00Z"
+    }
+  ],
+  "pendingItems": [
+    {
+      "id": "PEND-001",
+      "type": "sla-breach",
+      "severity": "critical",
+      "title": "SLA breach — Case resolution overdue",
+      "description": "W24-CASE-00003 (Sunita Oberoi — Will Drafting) has exceeded the 15-day SLA by 4 days. Currently at Review stage.",
+      "entityType": "case",
+      "entityId": "W24-CASE-00003",
+      "dueDate": "2026-04-13T00:00:00Z",
+      "createdAt": "2026-04-17T06:00:00Z"
+    },
+    {
+      "id": "PEND-002",
+      "type": "overdue-followup",
+      "severity": "high",
+      "title": "Overdue follow-up — Anil Verma",
+      "description": "Scheduled performance review with WM Anil Verma (WPAT-00003) is 3 days overdue. Last contact was 2 weeks ago.",
+      "entityType": "partner",
+      "entityId": "WPAT-00003",
+      "dueDate": "2026-04-14T00:00:00Z",
+      "createdAt": "2026-04-17T06:00:00Z"
+    },
+    {
+      "id": "PEND-003",
+      "type": "expiring-package",
+      "severity": "medium",
+      "title": "Expiring package — Suresh Nair",
+      "description": "Silver Tier package for Suresh Nair (WPAT-00005) expires on May 5, 2026. 4 wills remaining.",
+      "entityType": "package",
+      "entityId": "WPAT-00005",
+      "dueDate": "2026-04-20T00:00:00Z",
+      "createdAt": "2026-04-17T06:00:00Z"
+    },
+    {
+      "id": "PEND-004",
+      "type": "sla-breach",
+      "severity": "critical",
+      "title": "SLA breach — Document approval delayed",
+      "description": "Trust Deed for Arvind Saxena (W24-CASE-00002) has been Under Review for 8 days — exceeds 5-day approval SLA.",
+      "entityType": "document",
+      "entityId": "DOC-00028",
+      "dueDate": "2026-04-09T00:00:00Z",
+      "createdAt": "2026-04-17T06:00:00Z"
+    },
+    {
+      "id": "PEND-005",
+      "type": "overdue-followup",
+      "severity": "high",
+      "title": "Overdue follow-up — Lead Harish Gupta",
+      "description": "New lead referred by Rakesh Mehra has not been contacted in 2 days. Initial outreach required.",
+      "entityType": "lead",
+      "entityId": "W24-LEAD-00088",
+      "dueDate": "2026-04-15T00:00:00Z",
+      "createdAt": "2026-04-17T06:00:00Z"
+    },
+    {
+      "id": "PEND-006",
+      "type": "upcoming-deadline",
+      "severity": "low",
+      "title": "Upcoming — Court filing for Prakash Jain",
+      "description": "Court filing date for Succession Certificate (W24-CASE-00001) is scheduled for April 22. Ensure all documents are submitted.",
+      "entityType": "case",
+      "entityId": "W24-CASE-00001",
+      "dueDate": "2026-04-22T00:00:00Z",
+      "createdAt": "2026-04-17T06:00:00Z"
+    },
+    {
+      "id": "PEND-007",
+      "type": "pending-approval",
+      "severity": "medium",
+      "title": "Pending approval — Refund request",
+      "description": "Partial refund of ₹25,000 for Rajesh Malhotra (WCUS-00006) requires admin approval. Reason: service downgrade from Advanced to Basic Will.",
+      "entityType": "refund",
+      "entityId": "REF-0004",
+      "dueDate": "2026-04-19T00:00:00Z",
+      "createdAt": "2026-04-16T10:00:00Z"
+    },
+    {
+      "id": "PEND-008",
+      "type": "overdue-followup",
+      "severity": "high",
+      "title": "Overdue follow-up — Customer Meera Reddy",
+      "description": "Case W24-CASE-00007 has no follow-up in the last 7 days. Lawyer assignment was completed but customer hasn't been notified.",
+      "entityType": "case",
+      "entityId": "W24-CASE-00007",
+      "dueDate": "2026-04-10T00:00:00Z",
+      "createdAt": "2026-04-17T06:00:00Z"
+    }
+  ],
+  "salesTrend": [
+    { "month": "Nov 2025", "value": 1250000 },
+    { "month": "Dec 2025", "value": 980000 },
+    { "month": "Jan 2026", "value": 1450000 },
+    { "month": "Feb 2026", "value": 1680000 },
+    { "month": "Mar 2026", "value": 1620000 },
+    { "month": "Apr 2026", "value": 1875000 }
+  ],
+  "caseStatusDistribution": [
+    { "status": "In Progress", "count": 12, "color": "blue" },
+    { "status": "Drafting", "count": 5, "color": "violet" },
+    { "status": "Under Review", "count": 4, "color": "amber" },
+    { "status": "Completed", "count": 57, "color": "emerald" },
+    { "status": "On Hold", "count": 3, "color": "neutral" }
+  ],
+  "monthlyRevenue": [
+    { "month": "Nov 2025", "revenue": 1250000, "target": 1400000 },
+    { "month": "Dec 2025", "revenue": 980000, "target": 1400000 },
+    { "month": "Jan 2026", "revenue": 1450000, "target": 1500000 },
+    { "month": "Feb 2026", "revenue": 1680000, "target": 1500000 },
+    { "month": "Mar 2026", "revenue": 1620000, "target": 1500000 },
+    { "month": "Apr 2026", "revenue": 1875000, "target": 1600000 }
+  ],
+  "conversionFunnel": [
+    { "stage": "Total Leads", "count": 210 },
+    { "stage": "Qualified", "count": 156 },
+    { "stage": "Quotation Sent", "count": 118 },
+    { "stage": "Converted", "count": 81 }
+  ],
+  "quickActions": [
+    { "id": "qa-1", "label": "Add Lead", "icon": "user-plus", "module": "sales-crm" },
+    { "id": "qa-2", "label": "Create Case", "icon": "briefcase", "module": "case-management" },
+    { "id": "qa-3", "label": "Create Quotation", "icon": "file-text", "module": "sales-crm" },
+    { "id": "qa-4", "label": "Assign Lawyer", "icon": "scale", "module": "case-management" },
+    { "id": "qa-5", "label": "Add Partner", "icon": "handshake", "module": "partners" }
+  ],
+  "user": {
+    "name": "Anurag Bhatia",
+    "role": "Admin"
+  }
+}

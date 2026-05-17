@@ -1,0 +1,39 @@
+{
+  "notes": "Per-section sample data lives at sections/[section-id]/sample-data.json. The shapes here are minimal starter records aligned with data-model/types.ts.",
+  "leads": [
+    {
+      "id": "LD-00001",
+      "source": "Website",
+      "name": "Priya Sharma",
+      "phone": "+91-9876543210",
+      "email": "priya.sharma@example.com",
+      "city": "Bengaluru",
+      "state": "Karnataka",
+      "company": "Sharma Holdings",
+      "designation": "Director",
+      "serviceInterest": "Will Drafting (Basic)",
+      "wealthManagerId": "PAT-00001",
+      "assignedEmployee": "EMP-00012",
+      "status": "new",
+      "notes": "Inbound from website inquiry.",
+      "createdAt": "2026-05-10T09:24:00+05:30",
+      "lastActivity": "2026-05-10T09:24:00+05:30"
+    }
+  ],
+  "customers": [
+    {
+      "id": "W24-CUST-00045",
+      "leadId": "LD-00012",
+      "name": "Anjali Mehta",
+      "phone": "+91-9123456789",
+      "email": "anjali.mehta@example.com",
+      "company": "Mehta Industries",
+      "city": "Mumbai",
+      "state": "Maharashtra",
+      "pan": "ABCDE1234F",
+      "wealthManagerId": "PAT-00003",
+      "convertedAt": "2026-04-22T14:10:00+05:30",
+      "status": "active"
+    }
+  ]
+}

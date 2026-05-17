@@ -1,0 +1,305 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Lead {
+  id                String      @id @default(cuid())
+  status            String
+  assignedAgentId   String?
+  source            String
+  metadata          Json?
+  name              String
+  phone             String
+  email             String
+  address           String
+  city              String
+  state             String
+  pinCode           String
+  company           String?
+  designation       String?
+  serviceInterest   String
+  wealthManagerId   String
+  wealthManagerName String
+  assignedEmployee  String
+  leadType          String
+  notes             String?
+  lastActivity      DateTime?
+  deletedAt         DateTime?
+  customerId        String?
+  caseId            String?
+  quotations        Quotation[]
+  customer          Customer?   @relation("LeadCustomer", fields: [customerId], references: [id])
+  customerCase      Case?       @relation("LeadCaseByCaseId", fields: [caseId], references: [id])
+  caseRecord        Case?       @relation("LeadCaseByLeadId")
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+
+  @@index([status])
+  @@index([source])
+  @@index([assignedAgentId])
+  @@index([wealthManagerId])
+  @@index([createdAt])
+}
+
+model User {
+  id               String       @id @default(cuid())
+  email            String       @unique
+  name             String
+  phone            String?
+  password         String       @default("")
+  role             TeamRole     @default(ADMIN)
+  teamMember       TeamMember?
+  customers        Customer[]   @relation("CustomerWealthManager")
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+}
+
+model Customer {
+  id              String    @id @default(cuid())
+  accountId       String?
+  account         Account?  @relation(fields: [accountId], references: [id])
+  name            String
+  email           String?
+  phone           String?
+  tags            String[]
+  wealthManagerId String?
+  wealthManager   User?     @relation("CustomerWealthManager", fields: [wealthManagerId], references: [id])
+  cases           Case[]
+  leads           Lead[]    @relation("LeadCustomer")
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@map("customers")
+}
+
+model Case {
+  id               String     @id @default(cuid())
+  caseNo           String?    @unique
+  title            String?
+  serviceType      String?
+  customerId       String
+  leadId           String?    @unique
+  status           CaseStatus @default(OPEN)
+  level            Int        @default(1)
+  assignedLawyerId String?
+  customer         Customer   @relation(fields: [customerId], references: [id])
+  lead             Lead?      @relation("LeadCaseByLeadId", fields: [leadId], references: [id])
+  linkedLead       Lead[]     @relation("LeadCaseByCaseId")
+  assignedLawyer   Lawyer?    @relation(fields: [assignedLawyerId], references: [id])
+  followUps        FollowUp[]
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+  resolvedAt       DateTime?
+
+  @@index([customerId])
+  @@index([status])
+  @@index([createdAt])
+  @@map("cases")
+}
+
+model Quotation {
+  id              String    @id @default(cuid())
+  leadId          String
+  referenceNumber String?   @unique
+  items           Json?
+  subtotal        Decimal   @default(0) @db.Decimal(10, 2)
+  taxRate         Decimal   @default(0) @db.Decimal(10, 2)
+  taxAmount       Decimal   @default(0) @db.Decimal(10, 2)
+  total           Decimal   @default(0) @db.Decimal(10, 2)
+  grossAmount     Decimal   @default(0) @db.Decimal(10, 2)
+  cgst            Decimal   @default(0) @db.Decimal(10, 2)
+  sgst            Decimal   @default(0) @db.Decimal(10, 2)
+  netAmount       Decimal   @default(0) @db.Decimal(10, 2)
+  status          String
+  sentVia         String?
+  sentAt          DateTime?
+  customerState   String?
+  totalRate       Decimal?  @db.Decimal(10, 2)
+  approvedBy      String?
+  approvedAt      DateTime?
+  lead            Lead      @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@index([leadId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model Account {
+  id              String     @id @default(cuid())
+  accountNo       String     @unique
+  name            String
+  email           String?
+  phone           String?
+  state           String?
+  gstType         GSTType?
+  wealthManagerId String?
+  invoices        Invoice[]
+  customers       Customer[]
+  convertedFromId String?
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+
+  @@map("accounts")
+}
+
+model Invoice {
+  id          String        @id @default(cuid())
+  invoiceNo   String        @unique
+  accountId   String
+  account     Account       @relation(fields: [accountId], references: [id])
+  amount      Decimal       @db.Decimal(10, 2)
+  paidAmount  Decimal       @default(0) @db.Decimal(10, 2)
+  status      InvoiceStatus @default(UNPAID)
+  dueDate     DateTime
+  payments    Payment[]
+  creditNotes CreditNote[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@map("invoices")
+}
+
+model Payment {
+  id         String   @id @default(cuid())
+  invoiceId  String
+  invoice    Invoice  @relation(fields: [invoiceId], references: [id])
+  amount     Decimal  @db.Decimal(10, 2)
+  paidAt     DateTime @default(now())
+  recordedBy String
+
+  @@map("payments")
+}
+
+model CreditNote {
+  id         String    @id @default(cuid())
+  invoiceId  String
+  invoice    Invoice   @relation(fields: [invoiceId], references: [id])
+  amount     Decimal   @db.Decimal(10, 2)
+  reason     String
+  approvedAt DateTime?
+  approvedBy String?
+  createdAt  DateTime  @default(now())
+
+  @@map("credit_notes")
+}
+
+model FollowUp {
+  id          String    @id @default(cuid())
+  caseId      String
+  case        Case      @relation(fields: [caseId], references: [id])
+  action      String
+  serviceType String
+  scheduledAt DateTime
+  completedAt DateTime?
+  createdAt   DateTime  @default(now())
+
+  @@map("follow_ups")
+}
+
+model Lawyer {
+  id             String   @id @default(cuid())
+  name           String
+  email          String   @unique
+  phone          String?
+  specialization String[] @default([])
+  barNumber      String   @unique
+  isActive       Boolean  @default(true)
+  activeCases    Int      @default(0)
+  teamMemberId   String?
+  cases          Case[]
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@map("lawyers")
+}
+
+model Partner {
+  id            String           @id @default(cuid())
+  partnerId     String           @unique
+  name          String
+  email         String?
+  phone         String?
+  isActive      Boolean          @default(true)
+  walletBalance Decimal          @default(0) @db.Decimal(10, 2)
+  packages      PartnerPackage[]
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+
+  @@map("partners")
+}
+
+model PartnerPackage {
+  id         String               @id @default(cuid())
+  partnerId  String
+  partner    Partner              @relation(fields: [partnerId], references: [id])
+  name       String
+  totalWills Int
+  usedWills  Int                  @default(0)
+  status     PartnerPackageStatus @default(ACTIVE)
+  expiresAt  DateTime?
+  createdAt  DateTime             @default(now())
+
+  @@map("partner_packages")
+}
+
+model TeamMember {
+  id           String    @id @default(cuid())
+  userId       String    @unique
+  user         User      @relation(fields: [userId], references: [id])
+  role         TeamRole
+  isActive     Boolean   @default(true)
+  kycStatus    KYCStatus @default(PENDING)
+  kycDocuments Json?
+  deletedAt    DateTime?
+  createdAt    DateTime  @default(now())
+
+  @@map("team_members")
+}
+
+enum CaseStatus {
+  OPEN
+  IN_PROGRESS
+  ON_HOLD
+  COMPLETED
+  CANCELLED
+}
+
+enum InvoiceStatus {
+  UNPAID
+  PARTIAL
+  PAID
+  OVERDUE
+  REFUNDED
+}
+
+enum GSTType {
+  IGST
+  CGST_SGST
+  EXEMPT
+}
+
+enum PartnerPackageStatus {
+  ACTIVE
+  EXPIRED
+  EXHAUSTED
+}
+
+enum TeamRole {
+  ADMIN
+  WEALTH_MANAGER
+  LAWYER
+  SUPPORT
+}
+
+enum KYCStatus {
+  PENDING
+  UPLOADED
+  VERIFIED
+  REJECTED
+}
